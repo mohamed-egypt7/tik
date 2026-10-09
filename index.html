@@ -1,202 +1,377 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>رسالة خاصة إلى ليلى 🤍</title>
-  <style>
-    body {
-      background-color: #0f0f0f;
-      color: #ffffff;
-      font-family: Tahoma, sans-serif;
-      text-align: center;
-      padding: 20px;
-      margin: 0;
-      position: relative;
-      min-height: 100vh;
-      padding-bottom: 80px;
-    }
-    .container {
-      max-width: 400px;
-      margin: 40px auto;
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(255, 71, 87, 0.3);
-    }
-    /* تصميم الخانات بجانب بعضها */
-    .date-inputs {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin: 15px 0;
-    }
-    .date-inputs input {
-      width: 48%;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      background: #2a2a2a;
-      color: #fff;
-      text-align: center;
-      box-sizing: border-box;
-    }
-    button.submit-btn {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: none;
-      background: #ff4757;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    button.submit-btn:hover {
-      background: #ff6b81;
-    }
-    .hidden {
-      display: none;
-    }
-    img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    p {
-      line-height: 1.8;
-      color: #ddd;
-      font-size: 15px;
-      text-align: right;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi Lily 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Caveat:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
 
-    /* تصميم النافذة العائمة للأغنية (على اليمين تحت) */
-    .music-float-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #ff4757, #ff6b81);
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.5);
-      cursor: pointer;
-      z-index: 1000;
-      animation: pulse 2s infinite;
-    }
-    .music-float-btn span {
-      font-size: 24px;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
-      70% { box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
-    }
+        body {
+            background-color: #ff608c;
+            background-image: 
+                radial-gradient(#ff85a1 1.5px, transparent 1.5px),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='%23ffffff22'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+            background-size: 30px 30px, 120px 120px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            direction: rtl;
+        }
 
-    /* نافذة مشغل الموسيقى المنبثقة */
-    .music-modal {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-      z-index: 1001;
-      width: 280px;
-      display: none;
-      text-align: center;
-    }
-    .music-modal iframe {
-      width: 100%;
-      height: 150px;
-      border-radius: 8px;
-      border: none;
-    }
-    .close-modal {
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 8px;
-      font-size: 12px;
-      width: 100%;
-    }
-  </style>
+        .container {
+            width: 100%;
+            max-width: 390px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 25px 20px;
+            box-shadow: 0 12px 30px rgba(216, 27, 96, 0.25);
+            text-align: center;
+            border: 3px solid #ffffff;
+            position: relative;
+            width: 100%;
+        }
+
+        .cursive-title {
+            font-family: 'Great Vibes', 'Caveat', cursive;
+            font-size: 46px;
+            color: #d81b60;
+            margin: 0 0 10px 0;
+        }
+
+        .subtitle {
+            color: #e91e63;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            text-align: right;
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #d81b60;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid #ff80ab;
+            border-radius: 16px;
+            outline: none;
+            font-size: 16px;
+            text-align: right;
+            background: #fff5f8;
+            color: #333;
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        .btn-pink {
+            background: linear-gradient(135deg, #e91e63, #ff4081);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(233, 30, 99, 0.35);
+        }
+
+        .error-badge {
+            background: #fff0f5;
+            color: #c2185b;
+            padding: 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            border: 2px dashed #ff4081;
+        }
+
+        .success-badge {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            border: 2px dashed #81c784;
+        }
+
+        #mainContent {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .poem-container {
+            font-size: 16.5px;
+            line-height: 2.2;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .poem-container .highlight { color: #d81b60; font-weight: 700; }
+
+        .gallery-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 10px;
+        }
+
+        .gallery-item {
+            min-width: 100%;
+            scroll-snap-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid #ff80ab;
+            background: #fff5f8;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 92%;
+            max-height: 82vh;
+            border-radius: 15px;
+            object-fit: contain;
+        }
+
+        .text-box {
+            background: #fff5f8;
+            border: 1.5px solid #ff80ab;
+            padding: 12px;
+            border-radius: 15px;
+            color: #d81b60;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .love-text {
+            font-size: 32px;
+            color: #d81b60;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- شاشة إدخال اليوم والشهر -->
-  <div id="login-box" class="container">
-    <h2>أدخل تاريخ اليوم المميز 🔒</h2>
-    <div class="date-inputs">
-      <input type="number" id="day-input" placeholder="اليوم (مثلاً: 8)">
-      <input type="number" id="month-input" placeholder="الشهر (مثلاً: 10)">
+    <div class="container">
+
+        <!-- شاشة تسجيل الدخول (التاريخ 8 شهر 10) -->
+        <div class="card" id="loginCard">
+            <h1 class="cursive-title">Hi Lily</h1>
+            <div class="subtitle">ادخلي تاريخ اليوم المميز يا روحي 💖</div>
+
+            <div class="form-group">
+                <label>اليوم</label>
+                <input type="number" id="dayInput" placeholder="اليوم">
+            </div>
+
+            <div class="form-group">
+                <label>الشهر</label>
+                <input type="number" id="monthInput" placeholder="الشهر">
+            </div>
+
+            <button class="btn-pink" onclick="checkBirthday()">اضغط هنا يا قمر 💕</button>
+
+            <div class="error-badge" id="errorBadge">
+                خطأ في التاريخ يا ليلى ✨ جربي تاني!
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div id="mainContent">
+            
+            <div class="card">
+                <h1 class="cursive-title">Our Message</h1>
+                <div class="poem-container">
+                    <div>يا ليلى.. وسط كل اللخبطة والزحمة اللي حوالينا</div>
+                    <div>لما بكون قاعد معاكي والغروب قدامنا، بحس إن الزمن وقف بينا..</div>
+                    <div class="highlight">كفاية عليا ضحكتك، وريحة السيجارة اللي بتولعيها ليا</div>
+                    <div>وقعدتك اللي بتنسيني أي تعب..</div>
+                    <div class="highlight">انتي مش بس حبيبتي، انتي المكان الوحيد اللي بحس فيه إني مرتاح وبجد..</div>
+                    <div class="highlight" style="font-size: 20px; margin-top: 10px;">بحبك يا ليلى ❣️❣️❣️❣️❣️</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h1 class="cursive-title">Our Beautiful Memories</h1>
+                <div class="gallery-container">
+                    <div class="gallery-item" onclick="openLightbox('44786.jpg')">
+                        <img src="44786.jpg" alt="Memory 1" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500'">
+                    </div>
+                </div>
+                <div style="font-size:13px; color:#e91e63; margin-top:8px; font-weight:bold;">👈 اضغط للتكبير 👉</div>
+            </div>
+
+            <div class="card" id="songCard">
+                <h1 class="cursive-title">Our Favorite Song</h1>
+                <p style="color: #d81b60; font-weight: bold; margin-bottom: 5px;">🎵 أغنيتنا المفضلة 🎵</p>
+                
+                <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden; margin: 10px 0; border: 2px solid #ff80ab;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div class="text-box">
+                    كل ما بسمع الاغنيه دي بحبك اكتر و اكتر ❤️
+                </div>
+                
+                <div style="margin-top: 25px; text-align: right; border-top: 2px dashed #ff80ab; padding-top: 15px;">
+                    <label style="color: #d81b60; font-size: 15px; font-weight: bold; display: block; margin-bottom: 8px;">💌 اكتبي لي ردك أو رسالتك هنا يا ليلى:</label>
+                    <textarea id="visitorMessage" placeholder="اكتبي كلامك هنا..."></textarea>
+                    <button class="btn-pink" onclick="sendVisitorMessage()" style="margin-top: 10px; padding: 12px; font-size: 16px;">إرسال الرسالة 📤</button>
+                    <div class="success-badge" id="successBadge">
+                        تم إرسال رسالتك بنجاح يا ليلى ❤️ وصلت!
+                    </div>
+                </div>
+
+                <div class="love-text" style="margin-top: 20px;">بحبك يا ليلى ❣️</div>
+            </div>
+
+        </div>
+
     </div>
-    <button class="submit-btn" onclick="checkDate()">دخول</button>
-  </div>
 
-  <!-- محتوى الصفحة بعد إدخال التاريخ الصح -->
-  <div id="content-box" class="container hidden">
-    <img src="44786.jpg" alt="صورة رومانسية">
-    <h3>إلى ليلى 🤍</h3>
-    <p>
-      يا ليلى.. عارفة؟ وسط كل اللخبطة والزحمة اللي حوالينا، لما بكون قاعد معاكي والغروب قدامنا، بحس إن الزمن وقف بينا.. كفاية عليا ضحكتك، وريحة السيجارة اللي بتولعيها ليا، وقعدتك اللي بتنسيني أي تعب. انتي مش بس حبيبتي، انتي المكان الوحيد اللي بحس فيه إني مرتاح وبجد.. بحبك.
-    </p>
-  </div>
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img class="lightbox-img" id="lightboxImg">
+    </div>
 
-  <!-- زر تشغيل الأغنية العائم مع تأثير الأمواج -->
-  <div id="floating-music" class="music-float-btn hidden" onclick="toggleMusicModal()" title="شغل الأغنية 🎶">
-    <span>🎵</span>
-  </div>
+    <script>
+        const CORRECT_DAY = 8;
+        const CORRECT_MONTH = 10;
 
-  <!-- نافذة الأغنية المنبثقة -->
-  <div id="music-modal" class="music-modal">
-    <p style="margin: 0 0 10px 0; font-size: 13px; color: #ff4757;">أغنيتك المفضلة 🎶</p>
-    <iframe id="youtube-player" src="" allow="autoplay"></iframe>
-    <button class="close-modal" onclick="toggleMusicModal()">إغلاق النافذة</button>
-  </div>
+        const BOT_TOKEN = "8989450747:AAFQ56vM9mniwelDaqf5zqc76J2f3zorpE0";
+        const CHAT_ID = "8718173410";
 
-  <script>
-    function checkDate() {
-      const enteredDay = document.getElementById('day-input').value.trim();
-      const enteredMonth = document.getElementById('month-input').value.trim();
-      
-      // التحقق أن اليوم هو 8 والشهر هو 10 (بيقبل سواء كتبتها 8 أو 08)
-      const correctDay = "8";
-      const correctMonth = "10";
-      
-      if ((enteredDay === correctDay || enteredDay === "08") && enteredMonth === correctMonth) {
-        document.getElementById('login-box').style.display = 'none';
-        document.getElementById('content-box').classList.remove('hidden');
-        document.getElementById('floating-music').classList.remove('hidden');
-        
-        // تشغيل الأغنية فور الدخول
-        document.getElementById('youtube-player').src = "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1";
-      } else {
-        alert("التاريخ خطأ يا قلبي ! حاولي تاني ( ) ❌");
-      }
-    }
+        let visitorIP = "غير معروف";
 
-    function toggleMusicModal() {
-      const modal = document.getElementById('music-modal');
-      if (modal.style.display === 'block') {
-        modal.style.display = 'none';
-      } else {
-        modal.style.display = 'block';
-      }
-    }
-  </script>
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
 
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        window.addEventListener('load', async () => {
+            let visitMsg = `🚨 زائر جديد فتح رابط ليلى الآن!\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`;
+            
+            try {
+                let res = await fetch('https://ipapi.co/json/');
+                let data = await res.json();
+                visitorIP = data.ip || "غير معروف";
+                visitMsg = `🚨 زائر جديد دخل صفحة ليلى الآن!\n\n🌐 الـ IP: ${visitorIP}\n📍 اللوكيشن: ${data.country_name || ''} - ${data.city || ''}\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`;
+            } catch(e) {
+                try {
+                    let res2 = await fetch('https://api.ipify.org?format=json');
+                    let data2 = await res2.json();
+                    visitorIP = data2.ip;
+                    visitMsg += `\n🌐 الـ IP: ${visitorIP}`;
+                } catch(err){}
+            }
+
+            sendTelegramNotification(visitMsg);
+        });
+
+        function checkBirthday() {
+            const dayInput = document.getElementById('dayInput').value.trim();
+            const monthInput = document.getElementById('monthInput').value.trim();
+            const day = parseInt(dayInput);
+            const month = parseInt(monthInput);
+            const errorBadge = document.getElementById('errorBadge');
+
+            if (day === CORRECT_DAY && month === CORRECT_MONTH) {
+                errorBadge.style.display = 'none';
+                document.getElementById('loginCard').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'flex';
+                
+                sendTelegramNotification(`🎉 تم فتح الصفحة بنجاح بالتاريخ الصحيح! (8/10)\n🌐 الـ IP: ${visitorIP}`);
+            } else {
+                errorBadge.style.display = 'block';
+                sendTelegramNotification(`⚠️ محاولة دخول بتاريخ غير صحيح: (${dayInput}/${monthInput})\n🌐 الـ IP: ${visitorIP}`);
+            }
+        }
+
+        function sendVisitorMessage() {
+            const msgBox = document.getElementById('visitorMessage');
+            const messageText = msgBox.value.trim();
+            const successBadge = document.getElementById('successBadge');
+
+            if (!messageText) {
+                alert("اكتبي رسالة الاول يا ليلى! ❤️");
+                return;
+            }
+
+            const telegramMsg = `💌 رسالة جديدة من ليلى في الموقع!\n\n✍️ النص:\n"${messageText}"\n\n🌐 الـ IP: ${visitorIP}\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`;
+
+            sendTelegramNotification(telegramMsg);
+
+            successBadge.style.display = 'block';
+            msgBox.value = '';
+
+            setTimeout(() => {
+                successBadge.style.display = 'none';
+            }, 5000);
+        }
+
+        function sendTelegramNotification(text) {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+            }).catch(e => console.log(e));
+        }
+    </script>
 </body>
 </html>
