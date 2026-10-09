@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رسالة خاصة إلى ليلى 🤍</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #ffffff;
+      font-family: Tahoma, sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+      position: relative;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(255, 71, 87, 0.3);
+    }
+    /* تصميم الخانات بجانب بعضها */
+    .date-inputs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    .date-inputs input {
+      width: 48%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background: #2a2a2a;
+      color: #fff;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    button.submit-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #ff4757;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button.submit-btn:hover {
+      background: #ff6b81;
+    }
+    .hidden {
+      display: none;
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    p {
+      line-height: 1.8;
+      color: #ddd;
+      font-size: 15px;
+      text-align: right;
+    }
+
+    /* تصميم النافذة العائمة للأغنية (على اليمين تحت) */
+    .music-float-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff4757, #ff6b81);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.5);
+      cursor: pointer;
+      z-index: 1000;
+      animation: pulse 2s infinite;
+    }
+    .music-float-btn span {
+      font-size: 24px;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+    }
+
+    /* نافذة مشغل الموسيقى المنبثقة */
+    .music-modal {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+      z-index: 1001;
+      width: 280px;
+      display: none;
+      text-align: center;
+    }
+    .music-modal iframe {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      border: none;
+    }
+    .close-modal {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 8px;
+      font-size: 12px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- شاشة إدخال اليوم والشهر -->
+  <div id="login-box" class="container">
+    <h2>أدخل تاريخ اليوم المميز 🔒</h2>
+    <div class="date-inputs">
+      <input type="number" id="day-input" placeholder="اليوم (مثلاً: 8)">
+      <input type="number" id="month-input" placeholder="الشهر (مثلاً: 10)">
+    </div>
+    <button class="submit-btn" onclick="checkDate()">دخول</button>
+  </div>
+
+  <!-- محتوى الصفحة بعد إدخال التاريخ الصح -->
+  <div id="content-box" class="container hidden">
+    <img src="44786.jpg" alt="صورة رومانسية">
+    <h3>إلى ليلى 🤍</h3>
+    <p>
+      يا ليلى.. عارفة؟ وسط كل اللخبطة والزحمة اللي حوالينا، لما بكون قاعد معاكي والغروب قدامنا، بحس إن الزمن وقف بينا.. كفاية عليا ضحكتك، وريحة السيجارة اللي بتولعيها ليا، وقعدتك اللي بتنسيني أي تعب. انتي مش بس حبيبتي، انتي المكان الوحيد اللي بحس فيه إني مرتاح وبجد.. بحبك.
+    </p>
+  </div>
+
+  <!-- زر تشغيل الأغنية العائم مع تأثير الأمواج -->
+  <div id="floating-music" class="music-float-btn hidden" onclick="toggleMusicModal()" title="شغل الأغنية 🎶">
+    <span>🎵</span>
+  </div>
+
+  <!-- نافذة الأغنية المنبثقة -->
+  <div id="music-modal" class="music-modal">
+    <p style="margin: 0 0 10px 0; font-size: 13px; color: #ff4757;">أغنيتك المفضلة 🎶</p>
+    <iframe id="youtube-player" src="" allow="autoplay"></iframe>
+    <button class="close-modal" onclick="toggleMusicModal()">إغلاق النافذة</button>
+  </div>
+
+  <script>
+    function checkDate() {
+      const enteredDay = document.getElementById('day-input').value.trim();
+      const enteredMonth = document.getElementById('month-input').value.trim();
+      
+      // التحقق أن اليوم هو 8 والشهر هو 10 (بيقبل سواء كتبتها 8 أو 08)
+      const correctDay = "8";
+      const correctMonth = "10";
+      
+      if ((enteredDay === correctDay || enteredDay === "08") && enteredMonth === correctMonth) {
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('content-box').classList.remove('hidden');
+        document.getElementById('floating-music').classList.remove('hidden');
+        
+        // تشغيل الأغنية فور الدخول
+        document.getElementById('youtube-player').src = "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1";
+      } else {
+        alert("التاريخ خطأ يا قلبي ! حاولي تاني ( ) ❌");
+      }
+    }
+
+    function toggleMusicModal() {
+      const modal = document.getElementById('music-modal');
+      if (modal.style.display === 'block') {
+        modal.style.display = 'none';
+      } else {
+        modal.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
